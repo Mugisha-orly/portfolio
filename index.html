@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mugisha Olivier - Software Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <header>
+    <div class="toggle-theme">
+      <label class="switch">
+        <input type="checkbox" id="themeToggle" />
+        <span class="slider round"></span>
+      </label>
+      <span>Theme</span>
+    </div>
+    <div class="header-text">
+      <h1>Mugisha Olivier</h1>
+      <p>Software Developer </p>
+    </div>
+  </header>
+
+  <section class="about">
+    <img src="assets/Mugisha_Profile.jpg" alt="Mugisha Olivier" class="profile-pic" />
+    <div class="bio">
+      <div class="bio-text">
+        <h2>About Me</h2>
+        <p>
+          I'm a Rwandan software developer who builds clean, user-centered, and scalable applications.
+          I work with technologies like Java, SQL, and web frameworks to develop meaningful solutions
+          for businesses and communities.
+        </p>
+      </div>
+      <div class="cv-download">
+        <a href="assets/Mugisha-CV (1).docx" download>📄 Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Police Fine Management System</h3>
+        <p>Java Swing + Hibernate + MySQL system to manage traffic fines in Rwanda.</p>
+      </div>
+      <div class="project-card">
+        <h3>Restaurant Success Predictor</h3>
+        <p>Data science model using Python to analyze and predict restaurant performance.</p>
+      </div>
+      <div class="project-card">
+        <h3>Tourism Website</h3>
+        <p>HTML/CSS site to promote tourism in Rwanda with location-based services.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/><span>Java</span></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/><span>Python</span></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"/><span>MySQL</span></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"/><span>HTML</span></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"/><span>CSS</span></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"/><span>JavaScript</span></div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-box">
+      <div class="contact-item">
+        <h3><i class="fas fa-envelope"></i> Email</h3>
+        <p><a href="mailto:oliviermugisha99@gmail.com">oliviermugisha99@gmail.com</a></p>
+      </div>
+      <div class="contact-item">
+        <h3><i class="fas fa-phone"></i> Phone</h3>
+        <p><a href="tel:+250788637615">0788637615</a></p>
+      </div>
+      <div class="contact-item">
+        <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
+        <p><a href="https://wa.me/250788637615" target="_blank">Chat on WhatsApp</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Mugisha Olivier. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('themeToggle').addEventListener('change', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+
+</body>
+</html>
