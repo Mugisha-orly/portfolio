@@ -59,8 +59,8 @@
       return;
     }
 
-    const PW = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 260;
-    const PH = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 300;
+    const PW = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 300;
+    const PH = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 370;
 
     pc.width = PW;
     pc.height = PH;
@@ -163,8 +163,8 @@
       return;
     }
 
-    const PW = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 260;
-    const PH = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 300;
+    const PW = (wrapper && wrapper.clientWidth) ? wrapper.clientWidth : 300;
+    const PH = (wrapper && wrapper.clientHeight) ? wrapper.clientHeight : 370;
     pc.width = PW;
     pc.height = PH;
     const ctx = pc.getContext('2d');
@@ -259,11 +259,13 @@
         }
       }
 
-      // 1. Draw flying particles (Glow cyan matching the accent color #00e5cc)
+      // 1. Draw flying particles (Glow cyan matching the accent color: #00e5cc in dark, #0d9488 in light mode)
       if (flying.length > 0) {
-        ctx.shadowColor = '#00e5cc';
+        const isLight = document.body.classList.contains('light-mode');
+        const glowColor = isLight ? '#0d9488' : '#00e5cc';
+        ctx.shadowColor = glowColor;
         ctx.shadowBlur = 8;
-        ctx.fillStyle = '#00e5cc';
+        ctx.fillStyle = glowColor;
         for (let i = 0; i < flying.length; i++) {
           const p = flying[i];
           ctx.fillText(p.token, p.x, p.y);
@@ -308,33 +310,64 @@
   // Pre-load template on initial page load
   initTemplate();
 
-  // Trigger WHENEVER user reaches the About section
-  const aboutSec = document.getElementById('about');
-  if (aboutSec && 'IntersectionObserver' in window) {
+  let loaderDismissed = false;
+  let heroInView = false;
+
+  function triggerIfReady() {
+    if (!loaderDismissed || !heroInView || hasPlayedForCurrentEnter) return;
+    hasPlayedForCurrentEnter = true;
+    clearTimeout(enterDebounceTimer);
+    enterDebounceTimer = setTimeout(function () {
+      startAssemblyAnimation();
+    }, 100);
+  }
+
+  // Check when terminal loader finishes so particles fly right as hero opens
+  function checkLoader() {
+    const loader = document.getElementById('loader');
+    if (!loader || loader.classList.contains('loader-out')) {
+      loaderDismissed = true;
+      triggerIfReady();
+      return;
+    }
+
+    const interval = setInterval(function () {
+      const l = document.getElementById('loader');
+      if (!l || l.classList.contains('loader-out')) {
+        clearInterval(interval);
+        loaderDismissed = true;
+        setTimeout(triggerIfReady, 250);
+      }
+    }, 80);
+  }
+
+  checkLoader();
+
+  // Trigger WHENEVER user reaches / returns to the Hero section
+  const heroTarget = document.getElementById('hero') || document.getElementById('photoWrapper');
+  if (heroTarget && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          // User reached About section!
-          if (!hasPlayedForCurrentEnter) {
-            hasPlayedForCurrentEnter = true;
-            clearTimeout(enterDebounceTimer);
-            enterDebounceTimer = setTimeout(function () {
-              startAssemblyAnimation();
-            }, 120);
-          }
+          heroInView = true;
+          triggerIfReady();
         } else {
-          // User scrolled away from About section -> reset for next visit
+          heroInView = false;
           hasPlayedForCurrentEnter = false;
           clearTimeout(enterDebounceTimer);
           resetForNextScroll();
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.2 });
 
-    observer.observe(aboutSec);
+    observer.observe(heroTarget);
   } else {
     // Fallback if IntersectionObserver is not available
-    setTimeout(startAssemblyAnimation, 1000);
+    setTimeout(function () {
+      loaderDismissed = true;
+      heroInView = true;
+      triggerIfReady();
+    }, 2800);
   }
 
   // Global helper if called programmatically

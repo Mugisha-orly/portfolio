@@ -13,6 +13,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" />
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('portfolio-theme');
+        if (theme === 'light') {
+          document.documentElement.classList.add('light-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 
 <body>
@@ -65,6 +75,10 @@
         <li><a href="#contact"><span class="nav-num">04.</span>Contact</a></li>
       </ul>
       <a href="Mugisha _Olivier-CV.pdf" download class="btn-resume">Resume</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Light/Dark Mode" title="Toggle Light/Dark Mode">
+        <i class="fas fa-sun theme-icon-sun"></i>
+        <i class="fas fa-moon theme-icon-moon"></i>
+      </button>
       <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
     </div>
   </nav>
@@ -78,6 +92,11 @@
       <li><a href="#skills" class="mob-link"><span>03.</span>Skills</a></li>
       <li><a href="#contact" class="mob-link"><span>04.</span>Contact</a></li>
     </ul>
+    <button class="mob-theme-toggle" id="mobThemeToggle" aria-label="Toggle Light/Dark Mode">
+      <i class="fas fa-sun theme-icon-sun"></i>
+      <i class="fas fa-moon theme-icon-moon"></i>
+      <span class="theme-mode-text">Toggle Theme</span>
+    </button>
     <a href="Mugisha _Olivier-CV.pdf" download class="btn-resume mob-resume">Resume</a>
   </div>
   <div class="menu-overlay" id="menuOverlay"></div>
@@ -103,6 +122,14 @@
         <a href="Mugisha _Olivier-CV.pdf" download class="btn-ghost">
           <i class="fas fa-download"></i> Download CV
         </a>
+      </div>
+    </div>
+
+    <!-- Hero Photo on the Right Side with Particle Assembly Effect -->
+    <div class="hero-photo-wrapper fade-up" style="--d:0.6s">
+      <div class="hero-avatar" id="photoWrapper">
+        <canvas id="photoCanvas"></canvas>
+        <img src="Mugisha_Profile.jpg" alt="Mugisha Olivier" id="photoReal" />
       </div>
     </div>
   </section>
@@ -134,12 +161,6 @@
           <li><i class="fas fa-caret-right"></i>Git &amp; GitHub</li>
         </ul>
       </div>
-      <div class="about-photo reveal">
-        <div class="photo-wrapper" id="photoWrapper">
-          <canvas id="photoCanvas"></canvas>
-          <img src="Mugisha_Profile.jpg" alt="Mugisha Olivier" id="photoReal" />
-        </div>
-      </div>
     </div>
   </section>
 
@@ -150,10 +171,13 @@
     </h2>
 
     <div class="featured-projects">
-      <div class="featured-card reveal">
+      <div class="featured-card reveal" data-url="https://haloradio.online/" tabindex="0" role="link" aria-label="Halo Radio Platform">
         <div class="feat-text">
-          <p class="feat-label">// Featured Project</p>
-          <h3 class="feat-title"><a href="https://haloradio.online/" target="_blank">Halo Radio Platform</a></h3>
+          <div class="feat-header">
+            <span class="feat-label">// Featured Project</span>
+            <span class="feat-arrow"><i class="fas fa-arrow-up-right-from-square"></i> Visit</span>
+          </div>
+          <h3 class="feat-title"><a href="https://haloradio.online/" target="_blank" rel="noopener noreferrer">Halo Radio Platform</a></h3>
           <div class="feat-desc">
             <p>Live streaming platform supporting real-time user interaction. Developed and maintained backend services and database operations to support platform availability and user engagement.</p>
           </div>
@@ -163,24 +187,26 @@
             <li>PostgreSQL</li>
           </ul>
           <div class="feat-links">
-            <a href="https://github.com/Mugisha-orly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://haloradio.online/" target="_blank" title="Live Site"><i class="fas fa-external-link-alt"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://haloradio.online/" target="_blank" rel="noopener noreferrer" title="Live Site"><i class="fas fa-external-link-alt"></i></a>
           </div>
         </div>
         <div class="feat-img">
-          <a href="https://haloradio.online/" target="_blank">
-            <div class="feat-img-placeholder">
-              <i class="fas fa-broadcast-tower"></i>
-              <span>Halo Radio</span>
+          <a href="https://haloradio.online/" target="_blank" rel="noopener noreferrer" class="feat-img-link" tabindex="-1">
+            <div class="feat-img-showcase">
+              <img src="Halo Radio.png" alt="Halo Radio Logo" class="feat-logo-img" />
             </div>
           </a>
         </div>
       </div>
 
-      <div class="featured-card reverse reveal">
+      <div class="featured-card reverse reveal" data-url="https://simba-supermarket-website.vercel.app/" tabindex="0" role="link" aria-label="Simba Supermarket Management System">
         <div class="feat-text">
-          <p class="feat-label">// Featured Project</p>
-          <h3 class="feat-title"><a href="https://simba-supermarket-website.vercel.app/" target="_blank">Simba Supermarket Management System</a></h3>
+          <div class="feat-header">
+            <span class="feat-label">// Featured Project</span>
+            <span class="feat-arrow"><i class="fas fa-arrow-up-right-from-square"></i> Visit</span>
+          </div>
+          <h3 class="feat-title"><a href="https://simba-supermarket-website.vercel.app/" target="_blank" rel="noopener noreferrer">Simba Supermarket Management System</a></h3>
           <div class="feat-desc">
             <p>Full-stack management system for products, inventory, sales transactions, and customer records, with an emphasis on reliable database operations and business processes.</p>
           </div>
@@ -189,24 +215,26 @@
             <li>Database Management</li>
           </ul>
           <div class="feat-links">
-            <a href="https://github.com/Mugisha-orly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://simba-supermarket-website.vercel.app/" target="_blank" title="Live Site"><i class="fas fa-external-link-alt"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://simba-supermarket-website.vercel.app/" target="_blank" rel="noopener noreferrer" title="Live Site"><i class="fas fa-external-link-alt"></i></a>
           </div>
         </div>
         <div class="feat-img">
-          <a href="https://simba-supermarket-website.vercel.app/" target="_blank">
-            <div class="feat-img-placeholder">
-              <i class="fas fa-shopping-cart"></i>
-              <span>Simba Supermarket</span>
+          <a href="https://simba-supermarket-website.vercel.app/" target="_blank" rel="noopener noreferrer" class="feat-img-link" tabindex="-1">
+            <div class="feat-img-showcase">
+              <img src="Simba Supermarket.PNG" alt="Simba Supermarket Logo" class="feat-logo-img" />
             </div>
           </a>
         </div>
       </div>
 
-      <div class="featured-card reveal">
+      <div class="featured-card reveal" data-url="https://github.com/Mugisha-orly/Self-Service-SIM-Registration" tabindex="0" role="link" aria-label="USSD Telecom Services Platform">
         <div class="feat-text">
-          <p class="feat-label">// Featured Project</p>
-          <h3 class="feat-title">USSD Telecom Services Platform</h3>
+          <div class="feat-header">
+            <span class="feat-label">// Featured Project</span>
+            <span class="feat-arrow"><i class="fas fa-arrow-up-right-from-square"></i> View</span>
+          </div>
+          <h3 class="feat-title"><a href="https://github.com/Mugisha-orly/Self-Service-SIM-Registration" target="_blank" rel="noopener noreferrer">USSD Telecom Services Platform</a></h3>
           <div class="feat-desc">
             <p>Telecommunications platform enabling customers to navigate USSD menus and purchase packages. Implements session management, transaction recording, backend service integration, and administrative authentication.</p>
           </div>
@@ -217,21 +245,26 @@
             <li>REST APIs</li>
           </ul>
           <div class="feat-links">
-            <a href="https://github.com/Mugisha-orly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly/Self-Service-SIM-Registration" target="_blank" rel="noopener noreferrer" title="GitHub Repository"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly/Self-Service-SIM-Registration" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
           </div>
         </div>
         <div class="feat-img">
-          <div class="feat-img-placeholder">
-            <i class="fas fa-mobile-alt"></i>
-            <span>USSD Platform</span>
-          </div>
+          <a href="https://github.com/Mugisha-orly/Self-Service-SIM-Registration" target="_blank" rel="noopener noreferrer" class="feat-img-link" tabindex="-1">
+            <div class="feat-img-showcase">
+              <img src="MTN.png" alt="MTN Telecom Logo" class="feat-logo-img" />
+            </div>
+          </a>
         </div>
       </div>
 
-      <div class="featured-card reverse reveal">
+      <div class="featured-card reverse reveal" data-url="https://gitlab.com/oliviermugisha99/unhcr" tabindex="0" role="link" aria-label="UNHCR Rwanda Refugee Assistance Portal">
         <div class="feat-text">
-          <p class="feat-label">// Ongoing Project</p>
-          <h3 class="feat-title">UNHCR Rwanda Refugee Assistance Portal</h3>
+          <div class="feat-header">
+            <span class="feat-label">// Ongoing Project</span>
+            <span class="feat-arrow"><i class="fas fa-arrow-up-right-from-square"></i> View</span>
+          </div>
+          <h3 class="feat-title"><a href="https://gitlab.com/oliviermugisha99/unhcr" target="_blank" rel="noopener noreferrer">UNHCR Rwanda Refugee Assistance Portal</a></h3>
           <div class="feat-desc">
             <p>Multilingual web platform for refugee case management and assistance services, integrating PostgreSQL data management and REST APIs to support system interoperability.</p>
           </div>
@@ -242,25 +275,29 @@
             <li>REST APIs</li>
           </ul>
           <div class="feat-links">
-            <a href="https://github.com/Mugisha-orly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://gitlab.com/oliviermugisha99/unhcr" target="_blank" rel="noopener noreferrer" title="GitLab"><i class="fab fa-gitlab"></i></a>
+            <a href="https://gitlab.com/oliviermugisha99/unhcr" target="_blank" rel="noopener noreferrer" title="Project Repository"><i class="fas fa-external-link-alt"></i></a>
           </div>
         </div>
         <div class="feat-img">
-          <div class="feat-img-placeholder">
-            <i class="fas fa-hands-helping"></i>
-            <span>UNHCR Portal</span>
-          </div>
+          <a href="https://gitlab.com/oliviermugisha99/unhcr" target="_blank" rel="noopener noreferrer" class="feat-img-link" tabindex="-1">
+            <div class="feat-img-showcase">
+              <img src="UNHCR.png" alt="UNHCR Logo" class="feat-logo-img" />
+            </div>
+          </a>
         </div>
       </div>
     </div>
 
     <h3 class="other-title">// Other Noteworthy Projects</h3>
     <div class="other-grid">
-      <div class="other-card reveal">
+      <div class="other-card reveal" data-url="https://github.com/Mugisha-orly" tabindex="0" role="link" aria-label="Police Fine Management">
         <div class="other-top">
           <i class="fas fa-folder-open other-folder"></i>
-          <div class="other-links"><a href="https://github.com/Mugisha-orly" target="_blank"><i
-                class="fab fa-github"></i></a></div>
+          <div class="other-links">
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
         <h3>Police Fine Management</h3>
         <p>System to manage traffic fines in Rwanda with full CRUD, reporting, and user management.</p>
@@ -271,11 +308,13 @@
           <li>Swing</li>
         </ul>
       </div>
-      <div class="other-card reveal">
+      <div class="other-card reveal" data-url="https://github.com/Mugisha-orly" tabindex="0" role="link" aria-label="Restaurant Success Predictor">
         <div class="other-top">
           <i class="fas fa-folder-open other-folder"></i>
-          <div class="other-links"><a href="https://github.com/Mugisha-orly" target="_blank"><i
-                class="fab fa-github"></i></a></div>
+          <div class="other-links">
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
         <h3>Restaurant Success Predictor</h3>
         <p>ML model using Python to analyze and predict restaurant performance from real data.</p>
@@ -285,11 +324,13 @@
           <li>Scikit-learn</li>
         </ul>
       </div>
-      <div class="other-card reveal">
+      <div class="other-card reveal" data-url="https://github.com/Mugisha-orly" tabindex="0" role="link" aria-label="Library Management System">
         <div class="other-top">
           <i class="fas fa-folder-open other-folder"></i>
-          <div class="other-links"><a href="https://github.com/Mugisha-orly" target="_blank"><i
-                class="fab fa-github"></i></a></div>
+          <div class="other-links">
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
         <h3>Library Management System</h3>
         <p>Manages books, users, borrowing, returns, and admin reports in a library environment.</p>
@@ -299,11 +340,13 @@
           <li>Full-Stack</li>
         </ul>
       </div>
-      <div class="other-card reveal">
+      <div class="other-card reveal" data-url="https://github.com/Mugisha-orly" tabindex="0" role="link" aria-label="FlexPlatform">
         <div class="other-top">
           <i class="fas fa-folder-open other-folder"></i>
-          <div class="other-links"><a href="https://github.com/Mugisha-orly" target="_blank"><i
-                class="fab fa-github"></i></a></div>
+          <div class="other-links">
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
         <h3>FlexPlatform</h3>
         <p>Modular software platform integrating multiple digital services with scalable architecture.</p>
@@ -313,11 +356,13 @@
           <li>REST API</li>
         </ul>
       </div>
-      <div class="other-card reveal">
+      <div class="other-card reveal" data-url="https://github.com/Mugisha-orly" tabindex="0" role="link" aria-label="Tourism Website">
         <div class="other-top">
           <i class="fas fa-folder-open other-folder"></i>
-          <div class="other-links"><a href="https://github.com/Mugisha-orly" target="_blank"><i
-                class="fab fa-github"></i></a></div>
+          <div class="other-links">
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Mugisha-orly" target="_blank" rel="noopener noreferrer" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
         <h3>Tourism Website</h3>
         <p>Promotional site for Rwanda tourism with location-based services and rich media content.</p>
@@ -480,9 +525,10 @@
         if (this.y < 0 || this.y > H) this.vy *= -1;
       }
       draw() {
+        const isLight = document.body.classList.contains('light-mode');
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,229,204,0.5)';
+        ctx.fillStyle = isLight ? 'rgba(13,148,136,0.45)' : 'rgba(0,229,204,0.5)';
         ctx.fill();
       }
     }
@@ -490,6 +536,8 @@
     for (let i = 0; i < 80; i++) particles.push(new Particle());
 
     function drawLines() {
+      const isLight = document.body.classList.contains('light-mode');
+      const rgb = isLight ? '13,148,136' : '0,229,204';
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -499,7 +547,7 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,229,204,${0.12 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(${rgb},${0.12 * (1 - dist / 130)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -586,6 +634,58 @@
     document.addEventListener('mousemove', e => {
       glow.style.left = e.clientX + 'px';
       glow.style.top = e.clientY + 'px';
+    });
+
+    /* ===== THEME TOGGLE (WHITE / DARK MODE) ===== */
+    const themeToggle = document.getElementById('themeToggle');
+    const mobThemeToggle = document.getElementById('mobThemeToggle');
+
+    function applyTheme(isLight) {
+      document.body.classList.toggle('light-mode', isLight);
+      document.documentElement.classList.toggle('light-mode', isLight);
+      localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+
+      const mobLabel = document.querySelector('.theme-mode-text');
+      if (mobLabel) mobLabel.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+    }
+
+    // Check saved preference or system preference
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+      applyTheme(true);
+    } else {
+      applyTheme(false);
+    }
+
+    function toggleTheme() {
+      const isCurrentlyLight = document.body.classList.contains('light-mode');
+      applyTheme(!isCurrentlyLight);
+    }
+
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobThemeToggle) mobThemeToggle.addEventListener('click', toggleTheme);
+
+    /* ===== CLICKABLE PROJECT CARDS ===== */
+    document.querySelectorAll('.featured-card[data-url], .other-card[data-url]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // If clicking directly on an inner anchor or button, let native behavior proceed
+        if (e.target.closest('a')) return;
+        const url = card.getAttribute('data-url');
+        if (url) {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target.closest('a')) return;
+          const url = card.getAttribute('data-url');
+          if (url) {
+            e.preventDefault();
+            window.open(url, '_blank', 'noopener,noreferrer');
+          }
+        }
+      });
     });
   </script>
 
